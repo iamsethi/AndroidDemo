@@ -1,8 +1,9 @@
 version: 2
 jobs:
-  test:
+  build:	  
+    working_directory: ~/code
     docker:
-      - image: circleci/android:api-28-alpha  # gcloud is baked into this image
+      - image: circleci/android:api-27
     steps:
       - run:
           name: Build debug APK and release APK
