@@ -37,7 +37,7 @@ jobs:
       - run:
           name: Test with Firebase Test Lab
           command: >
-            sudo gcloud firebase test android run --app ../mytaxi-demo.apk --device model=Nexus6
+            sudo gcloud firebase test android run --app ./mytaxi-demo.apk --device model=Nexus6
       - run:
           name: Install gsutil dependency and copy test results data
           command: |
