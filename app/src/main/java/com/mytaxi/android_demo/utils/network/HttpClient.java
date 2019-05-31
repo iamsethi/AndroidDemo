@@ -8,6 +8,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.mytaxi.android_demo.misc.EspressoIdlingResource;
 import com.mytaxi.android_demo.models.Driver;
 import com.mytaxi.android_demo.models.User;
 
@@ -40,6 +41,7 @@ public class HttpClient {
     }
 
     public void fetchDrivers(final DriverCallback driverCallback) {
+        EspressoIdlingResource.increment();
         int amount = 256;
         String seed = "23f8827e04239990";
         String url = RANDOM_USER_URL + "?results=" + amount + "&seed=" + seed;
@@ -57,6 +59,7 @@ public class HttpClient {
                     if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
                     ArrayList<Driver> drivers = getDrivers(responseBody.string());
                     Log.i(LOG_TAG, "Fetched successfully " + drivers.size() + " drivers.");
+                    EspressoIdlingResource.decrement();
                     driverCallback.setDrivers(drivers);
                     driverCallback.run();
                 }
