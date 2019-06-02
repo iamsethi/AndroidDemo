@@ -102,15 +102,16 @@ public class ExampleInstrumentedTest {
         onView(withContentDescription(R.string.navigation_drawer_open)).perform(click());
 
         // Assertion checking that username displayed is correct
-        onView(ViewMatchers.withId(R.id.nav_username))
-                .check(matches(ViewMatchers.withText(username)));
+        onView(withId(R.id.nav_username))
+                .check(matches(withText(username)));
     }
 
     @Test
     public void login_failure() {
+        // incorrect password
         login(username, username);
 
-        // check toast visibility
+        // check snackbar visibility
         onView(withText(R.string.message_login_fail))
                 .check(matches(isDisplayed()));
     }
@@ -124,10 +125,10 @@ public class ExampleInstrumentedTest {
         onView(withId(R.id.textSearch))
                 .perform(typeText(SEARCH_KEYWORD));
 
-        //checking the drivername
+        //clicking on 2nd search result
         onView(withText(DRIVER_NAME)).inRoot(RootMatchers.isPlatformPopup()).perform(click());
 
-
+        //checking the drivername
         onView(withId(R.id.textViewDriverName)).check(matches(withText(DRIVER_NAME)));
 
         //click the call button
